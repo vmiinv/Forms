@@ -1,0 +1,42 @@
+<div class="card card-body m-2">
+  form-1 validity is: <strong [ngClass]="Form1.valid && Form11.valid && Form12.valid && form2 ? 'text-success' : 'text-danger'">{{Form1.valid && Form11.valid && Form12.valid && form2}}</strong>
+  <form action="">
+    <div ngForm #Form1="ngForm" class="card card-body m-2" required>
+      form-2 validity is: <strong [ngClass]=" Form1.valid && Form11.valid && Form12.valid ? 'text-success' : 'text-danger'">{{Form1.valid && Form11.valid && Form12.valid}}</strong>
+      <input type="text" name="text1" class="form-control" ngModel required>
+      <div ngForm #Form11="ngForm" class="card card-body m-2" required>
+        form-2.1 validity is: <strong [ngClass]=" Form11.valid ? 'text-success' : 'text-danger'">{{Form11.valid}}</strong>
+        <input type="text" name="text11" class="form-control" ngModel required>
+      </div>
+      <div ngForm #Form12="ngForm" class="card card-body m-2" required>
+        form-2.2 validity is: <strong [ngClass]=" Form12.valid ? 'text-success' : 'text-danger'">{{Form12.valid}}</strong>
+        <input type="text" name="text12" class="form-control" ngModel required>
+      </div>
+      <div><button (click)="react = !react" class="btn btn-primary">Toggle Reactive Form</button></div>
+
+      <div [formGroup]="formGroup" #Form2="ngForm"  *ngIf="react" class="card card-body m-2">
+        <h4>Reactive Form</h4>
+        form-3 validity is: <strong [ngClass]="Form2.valid && Form21.valid ? 'text-success' : 'text-danger'">{{Form2.valid && Form21.valid}}</strong>
+        <input (input)="form2 = !!Form2.valid && !!Form21.valid" type="text" class="form-control" formControlName="f2">
+
+        <div ngForm #Form21="ngForm" class="card card-body m-2" required>
+          form-3.1 validity is: <strong [ngClass]=" Form21.valid ? 'text-success' : 'text-danger'">{{Form21.valid}}</strong>
+          <input (input)="form2 = !!Form2.valid && !!Form21.valid" type="text" name="text21" class="form-control" ngModel required>
+        </div>
+      </div>
+    </div>
+
+      <div class="card card-body m-2">
+        <h4>Isolated Form</h4>
+        <div ngForm #Form3="ngForm" class="card card-body m-2">
+          form-4 validity is: <strong [ngClass]="Form3.valid && Form31.valid ? 'text-success' : 'text-danger'">{{Form3.valid && Form31.valid}}</strong>
+          <input type="text" class="form-control" name="text4" ngModel required>
+
+          <div ngForm #Form31="ngForm" class="card card-body m-2">
+            form-4.1 validity is: <strong [ngClass]=" Form31.valid ? 'text-success' : 'text-danger'">{{Form31.valid}}</strong>
+            <input type="text" name="text41" class="form-control" ngModel required>
+          </div>
+      </div>
+    </div>
+  </form>
+</div>
